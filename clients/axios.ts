@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import type { IGetRoomsReturn } from "~/types/IGetRoomsReturn";
 
 export const api = axios.create({
     baseURL: 'http://localhost:8000',
@@ -46,5 +47,12 @@ export const login = async (email: string, password: string) => {
     }
 }
 
+export const getRooms = async () => {
+    try {
+        const response = await api.get('/api/rooms')
 
-
+        return response.data as IGetRoomsReturn
+    } catch (err) {
+        throw new Error('Erro ao buscar quartos')
+    }
+}
