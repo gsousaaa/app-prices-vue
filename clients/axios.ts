@@ -60,3 +60,21 @@ export const getRooms = async () => {
         throw new Error('Erro ao buscar quartos')
     }
 }
+
+export const calculatePrice = async (roomId: number, occupancyRate: number) => {
+    try {
+        const response = await api.post(`/api/rooms/${roomId}/price`, {
+            occupancyRate
+        })
+
+        return response.data as { price: number, isDayOff: boolean, effectiveDate: string, created_at: Date }
+    } catch (err) {
+        if(err instanceof AxiosError) {
+            if(err.response?.status === 400) {
+                throw new Error(`Data de previsão inválida. Envie uma data maior que a atual`)
+            }
+
+           throw new Error('Erro ao calcular previsão de preço')
+        }
+    }
+}
