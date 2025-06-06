@@ -22,6 +22,10 @@ api.interceptors.request.use(config => {
 api.interceptors.response.use(
     response => response,
     error => {
+        if (error.response.status === 401) {
+            navigateTo('/login', { external: true })
+        }
+
         console.error('[Axios Error]', error.response || error.message)
         return Promise.reject(error)
     }
