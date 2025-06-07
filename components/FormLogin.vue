@@ -9,9 +9,6 @@
 
       <Button type="submit">Log In</Button>
 
-      <p class="text-center mt-4 text-sm text-blue-600 hover:underline cursor-pointer">
-        Sign Up
-      </p>
     </form>
   </div>
 </template>
